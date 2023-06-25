@@ -1,0 +1,17 @@
+Logging:
+  LogLevel:
+    Default: Information
+    Microsoft.AspNetCore: Warning
+AllowedHosts: "*"
+Urls: http://localhost:8081
+Telegram: 
+  Contacts:
+    Contact1:
+      Name: "Contact name"
+      BotToken: "YOUR_BOT_TOKEN"
+      ChatId: "YOUR_CHAT_ID"
+Grafana:
+  Url: "GRAFAN_URL"
+  Token: "YOUR_TOKEN"
+  ImageWidth: 800
+  ImageHeight: 400
