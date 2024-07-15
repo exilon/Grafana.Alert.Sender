@@ -3,7 +3,6 @@ Logging:
     Default: Information
     Microsoft.AspNetCore: Warning
 AllowedHosts: "*"
-Urls: http://localhost:8081
 Telegram: 
   Contacts:
     Contact1:
