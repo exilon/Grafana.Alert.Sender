@@ -37,4 +37,6 @@ jobs:
       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:latest -f docker/Dockerfile .
 
     - name: Push Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:latest
+      run: 
+        docker push ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:${{ steps.set_build_number.outputs.build_number }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:latest
