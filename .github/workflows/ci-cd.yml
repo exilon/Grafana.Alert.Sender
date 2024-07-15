@@ -38,5 +38,5 @@ jobs:
 
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:${{ github.run_number }}"
+        docker push ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:1.${{ github.run_number }}
         docker push ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:latest
