@@ -12,10 +12,10 @@ namespace Application.Services
         private readonly IAlertSender _alertSender;
         private readonly GrafanaOptions _options;
         private readonly ILogger<AlertService> _logger;
-        public AlertService(IAlertSender alertSender, IOptions<GrafanaOptions> options, ILogger<AlertService> logger)
+        public AlertService(IAlertSender alertSender, IOptions<GrafanaOptions> grafanaOptions, ILogger<AlertService> logger)
         {
             _alertSender = alertSender;
-            _options = options.Value;
+            _options = grafanaOptions.Value;
             _logger = logger;
         }
 

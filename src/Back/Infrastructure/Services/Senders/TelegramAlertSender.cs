@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions;
+using Application.Options;
 using Domain.DTOs;
-using Infrastructure.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Telegram.Bot;

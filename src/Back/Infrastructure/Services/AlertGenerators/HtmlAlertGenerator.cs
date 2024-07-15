@@ -3,9 +3,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
 using Application.Abstractions;
+using Application.Options;
 using Conditions;
 using Domain.DTOs;
-using Infrastructure.Options;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
