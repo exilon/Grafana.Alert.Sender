@@ -11,7 +11,9 @@ Telegram:
       BotToken: "YOUR_BOT_TOKEN"
       ChatId: "YOUR_CHAT_ID"
 Grafana:
-  Url: "GRAFAN_URL"
+  Url: "GRAFANA_URL"
   Token: "YOUR_TOKEN"
   ImageWidth: 800
   ImageHeight: 400
+  RejectNoData: false
+  RedirectNoDataToContact: "Contact name" 

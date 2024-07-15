@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Options;
+﻿namespace Application.Options;
 
 public class TelegramContact
 {

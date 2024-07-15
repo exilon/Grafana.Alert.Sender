@@ -1,9 +1,10 @@
 using Application.Abstractions;
 using Application.Services;
-using Application.Services.AlertGenerator;
 using Domain.Abstractions;
 using Infrastructure.Services.Senders;
 using System.Reflection;
+using Infrastructure.Options;
+using Infrastructure.Services.AlertGenerators;
 
 string assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
 

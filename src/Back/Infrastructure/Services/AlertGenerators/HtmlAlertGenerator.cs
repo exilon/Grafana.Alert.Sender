@@ -1,19 +1,15 @@
-﻿using Application.Abstractions;
-using Domain.DTOs;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net;
+﻿using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Application.Abstractions;
 using Conditions;
+using Domain.DTOs;
+using Infrastructure.Options;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
-namespace Application.Services.AlertGenerator
+namespace Infrastructure.Services.AlertGenerators
 {
     public class HtmlAlertGenerator : IAlertGenerator
     {
