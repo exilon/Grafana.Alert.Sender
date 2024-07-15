@@ -34,7 +34,7 @@ jobs:
         password: ${{ secrets.DOCKER_USERPASS }}
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:latest -f docker/Dockerfile .
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:1.${{ github.run_number }} -t ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:latest -f docker/Dockerfile .
 
     - name: Push Docker image
       run: |
