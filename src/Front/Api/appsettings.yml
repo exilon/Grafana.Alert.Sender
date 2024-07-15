@@ -16,4 +16,5 @@ Grafana:
   ImageWidth: 800
   ImageHeight: 400
   RejectNoData: false
+  #leave blank if no redirect is needed
   RedirectNoDataToContact: "Contact name" 
