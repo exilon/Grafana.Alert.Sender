@@ -24,7 +24,7 @@ namespace Application.Services
             foreach (var alert in grafanaAlert?.alerts)
             {
                 var contact = contactName;
-                if (alert.labels?.GetValueOrDefault("alertname") == "DataSourceError" ||
+                if (alert.labels?.GetValueOrDefault("alertname") == "DatasourceError" ||
                     alert.labels?.GetValueOrDefault("alertname") == "DatasourceNoData")
                 {
                     if (_options.RejectNoData)
