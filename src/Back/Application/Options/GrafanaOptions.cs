@@ -4,6 +4,7 @@ public class GrafanaOptions
 {
     public string Url { get; set; }
     public string Token { get; set; }
+    public string Theme { get; set; }
     public int ImageWidth { get; set; }
     public int ImageHeight { get; set; }
     public bool RejectNoData { get; set; }

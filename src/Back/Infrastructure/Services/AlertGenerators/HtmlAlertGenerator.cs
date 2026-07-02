@@ -51,7 +51,8 @@ namespace Infrastructure.Services.AlertGenerators
             string pattern = @"metric='(?<metric>[^']*)'\s+[^}]*}\s+value=(?<value>[^ ]*)";
 
             StringBuilder result = new StringBuilder();
-            foreach (Match match in Regex.Matches(valueString, pattern))
+            var input = valueString ?? string.Empty;
+            foreach (Match match in Regex.Matches(input, pattern))
             {
                 string metric = match.Groups["metric"].Value;
                 string value = match.Groups["value"].Value;
@@ -72,11 +73,12 @@ namespace Infrastructure.Services.AlertGenerators
             panelId.Requires().IsNotNullOrEmpty();
             if (string.IsNullOrEmpty(orgId)) orgId = "1";
             var url = $"{_grafanaOptions.Url}/render/d-solo/{dashboardUID}?orgId={orgId}&panelId={panelId}&width={_grafanaOptions.ImageWidth}&height={_grafanaOptions.ImageHeight}&tz=Europe%2FMadrid";
+            var renderUrl = AppendQueryParameter(url, "theme", _grafanaOptions.Theme);
             using var httpClient = new HttpClient();
             httpClient.Timeout = TimeSpan.FromSeconds(30);
             var accessToken = _grafanaOptions.Token;
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var response = await httpClient.GetAsync(url);
+            var response = await httpClient.GetAsync(renderUrl);
             if (response.IsSuccessStatusCode)
             {
                 var contentType = response.Content.Headers.ContentType.MediaType;
@@ -91,9 +93,24 @@ namespace Infrastructure.Services.AlertGenerators
 
         private string FixGrafanaUrl(string url)
         {
+            if (string.IsNullOrWhiteSpace(url)) return string.Empty;
+
             var correctPort = url.Replace(":3000", "");
             var correctUrl = correctPort.Replace("http://localhost", _grafanaOptions.Url);
-            return correctUrl;
+            return AppendQueryParameter(correctUrl, "theme", _grafanaOptions.Theme);
+        }
+
+        private string AppendQueryParameter(string url, string parameterName, string parameterValue)
+        {
+            if (string.IsNullOrWhiteSpace(url) || string.IsNullOrWhiteSpace(parameterValue)) return url;
+
+            if (Regex.IsMatch(url, $@"{Regex.Escape(parameterName)}="))
+            {
+                return Regex.Replace(url, $@"{Regex.Escape(parameterName)}=[^&]*", $"{parameterName}={Uri.EscapeDataString(parameterValue)}");
+            }
+
+            var separator = url.Contains("?") ? "&" : "?";
+            return $"{url}{separator}{parameterName}={Uri.EscapeDataString(parameterValue)}";
         }
 
         public string GenerateAlert(Alert alert)

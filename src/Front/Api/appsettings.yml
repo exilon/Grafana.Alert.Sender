@@ -12,6 +12,7 @@ Telegram:
 Grafana:
   Url: "GRAFANA_URL"
   Token: "YOUR_TOKEN"
+  Theme: "dark"
   ImageWidth: 800
   ImageHeight: 400
   RejectNoData: false

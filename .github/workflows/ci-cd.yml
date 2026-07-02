@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image (release)
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '10.0.x'
 
     - name: Restore dependencies
       run: dotnet restore src/Grafana.Alert.Sender.sln
@@ -34,9 +34,14 @@ jobs:
         password: ${{ secrets.DOCKER_USERPASS }}
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:1.${{ github.run_number }} -t ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:latest -f docker/Dockerfile .
+      run: |
+        IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender
+        TAG=1.${{ github.run_number }}
+        docker build -t $IMAGE_NAME:$TAG -t $IMAGE_NAME:latest -f docker/dockerfile .
 
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:1.${{ github.run_number }}
-        docker push ${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender:latest
+        IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/grafana.alert.sender
+        TAG=1.${{ github.run_number }}
+        docker push $IMAGE_NAME:$TAG
+        docker push $IMAGE_NAME:latest
